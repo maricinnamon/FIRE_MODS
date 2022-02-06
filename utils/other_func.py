@@ -2,6 +2,8 @@ import math
 from utils.const import OPTIMIZATION, POPULATION
 
 
+
+
 def euclidean_distance(a, b):
     """ EUCLIDEAN DISTANCE BETWEEN TWO POINTS """
     x1 = a[0]

@@ -2,7 +2,7 @@ from utils.const import REGIONS, RADIUS, PROB, FP
 from utils.other_func import euclidean_distance
 
 
-def f(FS):
+def fitness_function(FS):
     """ TARGET FUNCTION """
     '''
     s = 0 # фінтес-функція просто для перевірки, що все гарно працює, без помилок

@@ -3,21 +3,34 @@ import random
 
 FIREPOINTS = 100  # кількість пожеж
 POPULATION = 10  # кількість наборів сповіщувачів
-FIRESENSORS = 15  # кількість сповіщувачів у наборі
-RADIUS = 2  # радіус дії одного сповіщувача
+FIRESENSORS = 100  # кількість сповіщувачів у наборі (MODS)
+RADIUS = 0.75  # радіус дії одного сповіщувача - (масштаб 1:10)
 PROB = 0.9  # ймовірність спрацювання сповіщувача
 
-FIGURETYPE = 3  # n-кутник
+# НОРМИ ДБН В.2.5-56:2014. КВАДРАТНА СІТКА
+# максимальна відстань між сповіщувачами = 10.5м
+DIST_BTW_FIRESENSORS_SQUARE_NET = 1.05  # - (масштаб 1:10), тобто, тут задано 10.5м
+# максимальна відстань між сповіщувачем і стіною = 5.3м
+DIST_BTW_FIRESENSOR_AND_WALL_SQUARE_NET = 0.53 # - (масштаб 1:10), тобто, тут задано 5.3м
+
+# НОРМИ ДБН В.2.5-56:2014. ТРИКУТНА СІТКА
+# максимальна відстань між сповіщувачами = 13м
+DIST_BTW_FIRESENSORS_TRIANGLE_NET = 1.3  # - (масштаб 1:10), тобто, тут задано 13м
+# максимальна відстань між сповіщувачем і стіною = 3.75м
+DIST_BTW_FIRESENSOR_AND_WALL_TRIANGLE_NET = 0.375
+
+
+FIGURETYPE = 5  # n-кутник
 FIGUREGROUPS = 10  # скільки фігур створюємо для перетворень
 DIST_COEF = 2  # коефіцієнт для перетворень
 
 RND = 4  # кількість знаків після коми
 OPTIMIZATION = "min"  # "max" / "min"
 
-# OX
+# OX (масштаб 1:10)
 P1 = 0
 P2 = 10
-# OY
+# OY (масштаб 1:10)
 Q1 = 0
 Q2 = 10
 
@@ -35,26 +48,24 @@ REGIONS = [
 ]
 
 # УМОВИ ЗАКІНЧЕННЯ
-ITERATIONS = 100
+ITERATIONS = 15
 EPS = math.pow(1 * 10, -1 * RND)  # точність
 
 # СКІЛЬКИ РАЗІВ ЗАПУСКАЄМО КОД
 COUNT = 5
 
 
-
+# КОНСТАНТІ ТОЧКИ ПОЖЕЖІ НА СКЛАДІ
 def generate_firepoints():
     """ GENERATE ARRAY OF FIREPOINTS
-    розставляємо точки пожежі на складі """
+    розставляємо константі точки пожежі на складі """
     FP = []
     while (len(FP) != FIREPOINTS):
         x = round(random.uniform(P1, P2), RND)
         y = round(random.uniform(Q1, Q2), RND)
-
         for j in range(len(REGIONS)):
             if (REGIONS[j][0][0] <= x <= REGIONS[j][1][0] and REGIONS[j][0][1] <= y <= REGIONS[j][1][1]):
                 FP.append([x, y])
     return FP
-
 
 FP = generate_firepoints()

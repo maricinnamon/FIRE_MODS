@@ -4,7 +4,7 @@ import random
 from utils.check_func import transform_compression_check, transform_turn_check
 from utils.const import OPTIMIZATION, RND, DIST_COEF
 from utils.other_func import s
-from utils.target_func import f
+from utils.target_func import fitness_function
 
 
 def find_best_vector(FIG):
@@ -32,7 +32,7 @@ def find_center_vector(FIG):
         y = round(y / len(FIG), RND)
         center.append([x, y])
 
-    center.append(f(center))  # ост. ел. - фінтес-функція "центрального" набору датчиків
+    center.append(fitness_function(center))  # ост. ел. - фінтес-функція "центрального" набору датчиків
 
     return center
 
@@ -67,7 +67,7 @@ def compression_of_one_figure(FIG):
         y1 = round(y1, RND)
 
         newVector.append([x1, y1])
-    newVector.append(f(newVector))  # останній елемент - фінтес-функція набору датчиків
+    newVector.append(fitness_function(newVector))  # останній елемент - фінтес-функція набору датчиків
     comprFIG.append(newVector)  # додаємо новий найкращий вектор до масиву нової стиснутої фігури
 
     # СТИСКАЄМО ВСІ ІНШІ ВЕКТОРИ
@@ -90,7 +90,7 @@ def compression_of_one_figure(FIG):
                 y0 = round(y0, RND)
 
                 newVector.append([x0, y0])
-            newVector.append(f(newVector))  # останній елемент - фінтес-функція
+            newVector.append(fitness_function(newVector))  # останній елемент - фінтес-функція
             comprFIG.append(newVector)  # додаємо новий вектор до масиву фігури
 
     return comprFIG
@@ -148,16 +148,14 @@ def turn_of_one_figure_around_best_vector(FIG):
                 p2new = round(p2new, RND)
 
                 newVector.append([p1new, p2new])
-            newVector.append(f(newVector))  # останній елемент - фінтес-функція
+            newVector.append(fitness_function(newVector))  # останній елемент - фінтес-функція
             turnFIG.append(newVector)  # додаємо новий вектор до масиву фігури
 
     return turnFIG
 
 
-''' --- TURN ALL FIGURES AROUND BEST VECTOR ---- '''
-
-
 def turn_around_best_vector(G):
+    """ TURN ALL FIGURES AROUND BEST VECTOR """
     turnBestG = []
 
     for w in range(len(G)):  # для кожної фігури у масиві
@@ -168,10 +166,8 @@ def turn_around_best_vector(G):
     return turnBestG
 
 
-''' --- TURN OF ONE FIG AROUND CENTER VECTOR --- '''
-
-
 def turn_of_one_figure_around_center_vector(FIG):
+    """ TURN OF ONE FIG AROUND CENTER VECTOR """
     turnFIG = []
 
     center = find_center_vector(FIG)  # знаходимо найкращий вектор
@@ -198,16 +194,17 @@ def turn_of_one_figure_around_center_vector(FIG):
             p2new = round(p2new, RND)
 
             newVector.append([p1new, p2new])
-        newVector.append(f(newVector))  # останній елемент - фінтес-функція
+        newVector.append(fitness_function(newVector))  # останній елемент - фінтес-функція
         turnFIG.append(newVector)  # додаємо новий вектор до масиву фігури
 
     return turnFIG
 
 
-''' -- TURN ALL FIGURES AROUND CENTER VECTOR --- '''
+
 
 
 def turn_around_center_vector(G):
+    """ TURN ALL FIGURES AROUND CENTER VECTOR """
     turnCenterG = []
 
     for w in range(len(G)):  # для кожної фігури у масиві
