@@ -42,28 +42,6 @@ def generate_firesensors_square_net():
     return FS
 
 
-# def generate_firesensors_triangle_net():
-#     """ GENERATE ARRAY OF FIREPOINTS IN TRIANGLE NET POSITION
-#     розставляємо датчики на складі відповідно до трикутної сітки
-#     """
-#     FS = []
-#     counter = 0 # номер ряду - парний/непарний
-#     y_coord = DIST_BTW_FIRESENSOR_AND_WALL_TRIANGLE_NET
-#     while ((Q2 - y_coord >= DIST_BTW_FIRESENSOR_AND_WALL_TRIANGLE_NET)):
-#         # початкове розміщення на цій відстані від стіни, початок відліку, залежить від номеру ряду
-#         if (counter % 2 == 0):
-#             x_coord = 0
-#         if (counter %2 == 1):
-#             x_coord = DIST_BTW_FIRESENSORS_TRIANGLE_NET/2
-#         while ((P2 - x_coord >= DIST_BTW_FIRESENSOR_AND_WALL_TRIANGLE_NET)):
-#             x, y = x_coord, y_coord  # записуємо поточні координати
-#             FS.append([x, y])
-#             x_coord = x_coord + DIST_BTW_FIRESENSORS_TRIANGLE_NET
-#         y_coord = y_coord + DIST_BTW_FIRESENSORS_TRIANGLE_NET
-#         counter = counter + 1
-#     return FS
-
-
 def generate_firesensors_triangle_net():
     """ GENERATE ARRAY OF FIREPOINTS IN TRIANGLE NET POSITION
     розставляємо датчики на складі відповідно до квадратної сітки """
